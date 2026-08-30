@@ -2,7 +2,7 @@
 
 基于 React Router Framework Mode + Cloudflare Workers 的临时邮箱服务。
 
-[Deploy to Cloudflare](https://deploy.workers.cloudflare.com/?url=https://github.com/vtea/smail-main)
+[Deploy to Cloudflare](https://deploy.workers.cloudflare.com/?url=https://github.com/vtea/fmail)
 
 下列域名与资源名均为**示范**，部署时换成你自己的。不要把文档里的示例值抄进生产。
 
