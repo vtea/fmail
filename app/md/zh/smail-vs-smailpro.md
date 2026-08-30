@@ -1,10 +1,10 @@
-## smail.pw 与 smailpro 关系说明
+## FMail 与 smailpro 关系说明
 
-针对用户常见搜索，这里做官方说明：**smail.pw 是独立临时邮箱服务**。
+针对用户常见搜索，这里做官方说明：**FMail 是独立临时邮箱服务**。
 
 ### 关键信息
 
-- smail.pw 与 smail pro / smailpro 不是同一产品
+- FMail 与 smail pro / smailpro 不是同一产品
 - 与同名或近似名称站点无隶属关系
 - 功能、策略与基础设施均独立维护
 
@@ -14,6 +14,4 @@
 
 ### 相关阅读
 
-- [关于 smail.pw](/about)
-- [常见问题](/faq)
-- [隐私政策](/privacy)
+- [使用条款](/terms)

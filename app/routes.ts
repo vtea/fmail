@@ -1,9 +1,6 @@
 import { layout, type RouteConfig, route } from "@react-router/dev/routes";
 
 const mdPages = [
-	"about",
-	"faq",
-	"privacy",
 	"terms",
 	"temporary-email-24-hours",
 	"temporary-email-no-registration",
@@ -14,6 +11,8 @@ const mdPages = [
 	"can-temporary-email-send",
 	"smail-vs-smailpro",
 ];
+
+const retiredPages = ["about", "faq", "privacy"];
 
 export default [
 	route("/zh-CN", "routes/locale-zh-cn-redirect.tsx", {
@@ -32,6 +31,11 @@ export default [
 	route("/sitemap.xml", "routes/sitemap.xml.tsx"),
 	layout("routes/layout.tsx", [
 		route(":lang?", "routes/home.tsx", { id: "home" }),
+		...retiredPages.map((page) =>
+			route(`:lang?/${page}`, "routes/legacy-page-redirect.tsx", {
+				id: `legacy-${page}`,
+			}),
+		),
 		...mdPages.map((page) =>
 			route(`:lang?/${page}`, "routes/md.tsx", { id: `md-${page}` }),
 		),

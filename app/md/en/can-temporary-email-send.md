@@ -18,7 +18,7 @@ Use a long-term provider if you need:
 
 ### Conclusion
 
-Use smail.pw for receiving verification messages quickly. Use a permanent email service when sending is required.
+Use FMail for receiving verification messages quickly. Use a permanent email service when sending is required.
 
 ### Related pages
 

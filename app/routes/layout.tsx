@@ -15,11 +15,6 @@ import {
 	toLocalePath,
 } from "~/i18n/config";
 import { getDictionary } from "~/i18n/messages";
-import {
-	createThemeCookie,
-	parseThemeFromCookieHeader,
-	type ThemeMode,
-} from "~/utils/theme";
 import type { Route } from "./+types/layout";
 
 export async function loader({ params, request }: Route.LoaderArgs) {
@@ -34,16 +29,13 @@ export async function loader({ params, request }: Route.LoaderArgs) {
 		const normalizedPath = stripDefaultLocalePrefix(url.pathname);
 		throw redirect(`${normalizedPath}${url.search}`, 301);
 	}
-	const theme = parseThemeFromCookieHeader(request.headers.get("Cookie"));
 	return {
 		locale,
-		theme,
 		renderedYear: new Date().getUTCFullYear(),
 	};
 }
 
 export default function Layout({ loaderData }: Route.ComponentProps) {
-	const [theme, setTheme] = useState<ThemeMode>(loaderData.theme);
 	const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const languageMenuRef = useRef<HTMLDivElement | null>(null);
@@ -55,20 +47,8 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 	const localeEntries = Object.entries(LOCALE_LABELS) as [Locale, string][];
 	const currentLocaleLabel = LOCALE_LABELS[locale];
 	const mobileLanguageLabel = locale === "zh" ? "语言" : "Language";
-	const mobileAppearanceLabel = locale === "zh" ? "界面" : "Appearance";
 
 	const localizeLink = (path: string) => toLocalePath(path, locale);
-
-	useEffect(() => {
-		if (typeof document === "undefined") {
-			return;
-		}
-		if (theme === "light") {
-			document.documentElement.dataset.theme = "light";
-		} else {
-			delete document.documentElement.dataset.theme;
-		}
-	}, [theme]);
 
 	useEffect(() => {
 		setIsLanguageMenuOpen(false);
@@ -108,12 +88,6 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 		};
 	}, [isLanguageMenuOpen, isMobileMenuOpen]);
 
-	const toggleTheme = () => {
-		const nextTheme: ThemeMode = theme === "dark" ? "light" : "dark";
-		setTheme(nextTheme);
-		document.cookie = createThemeCookie(nextTheme);
-	};
-
 	const switchLocale = (nextLocale: Locale) => {
 		if (nextLocale === locale) {
 			setIsLanguageMenuOpen(false);
@@ -143,14 +117,14 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 							<span className="brand-badge relative inline-flex size-[36px]">
 								<img
 									src="/favicon.ico"
-									alt="smail.pw logo"
+									alt="FMail logo"
 									className="size-[20px]"
 								/>
 								<span className="absolute -inset-px -z-10 rounded-xl bg-blue-500/25 blur-sm transition group-hover:bg-cyan-400/35" />
 							</span>
 							<div className="space-y-0.5">
 								<span className="font-display block text-base font-bold tracking-tight text-theme-primary">
-									smail.pw
+									FMail
 								</span>
 								<span className="block text-[10px] uppercase tracking-[0.2em] text-theme-faint">
 									{copy.siteSubtitle}
@@ -170,22 +144,13 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 								{copy.nav.home}
 							</NavLink>
 							<NavLink
-								to={localizeLink("/about")}
+								to={localizeLink("/terms")}
 								prefetch="viewport"
 								className={({ isActive }) =>
 									isActive ? "nav-pill-active" : "nav-pill"
 								}
 							>
-								{copy.nav.about}
-							</NavLink>
-							<NavLink
-								to={localizeLink("/faq")}
-								prefetch="viewport"
-								className={({ isActive }) =>
-									isActive ? "nav-pill-active" : "nav-pill"
-								}
-							>
-								{copy.nav.faq}
+								{copy.nav.terms}
 							</NavLink>
 						</nav>
 						<div className="mobile-menu sm:hidden" ref={mobileMenuRef}>
@@ -244,40 +209,15 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 									{copy.nav.home}
 								</NavLink>
 								<NavLink
-									to={localizeLink("/about")}
+									to={localizeLink("/terms")}
 									prefetch="viewport"
 									onClick={closeMobileMenu}
 									className={({ isActive }) =>
 										isActive ? "mobile-menu-link-active" : "mobile-menu-link"
 									}
 								>
-									{copy.nav.about}
+									{copy.nav.terms}
 								</NavLink>
-								<NavLink
-									to={localizeLink("/faq")}
-									prefetch="viewport"
-									onClick={closeMobileMenu}
-									className={({ isActive }) =>
-										isActive ? "mobile-menu-link-active" : "mobile-menu-link"
-									}
-								>
-									{copy.nav.faq}
-								</NavLink>
-								<div className="mobile-menu-section">
-									<p className="mobile-menu-section-label">
-										{mobileAppearanceLabel}
-									</p>
-									<button
-										type="button"
-										className="mobile-menu-link"
-										onClick={() => {
-											toggleTheme();
-											closeMobileMenu();
-										}}
-									>
-										{theme === "dark" ? copy.themeToLight : copy.themeToDark}
-									</button>
-								</div>
 								<div className="mobile-menu-section">
 									<p className="mobile-menu-section-label">
 										{mobileLanguageLabel}
@@ -356,13 +296,6 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 								))}
 							</div>
 						</div>
-						<button
-							type="button"
-							className="theme-toggle hidden sm:inline-flex"
-							onClick={toggleTheme}
-						>
-							{theme === "dark" ? copy.themeToLight : copy.themeToDark}
-						</button>
 					</div>
 				</header>
 
@@ -371,54 +304,17 @@ export default function Layout({ loaderData }: Route.ComponentProps) {
 				</main>
 
 				<footer className="glass-panel mt-auto px-4 py-5 sm:px-6 sm:py-6">
-					<div className="flex flex-col gap-6 sm:flex-row sm:justify-between">
-						<div className="max-w-sm space-y-3">
-							<p className="soft-tag">{copy.footerTag}</p>
-							<p className="text-sm leading-relaxed text-theme-secondary">
-								{copy.footerDescription}
-							</p>
+					<div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+						<div className="text-[11px] text-theme-faint">
+							© {loaderData.renderedYear} FMail · {copy.copyright}
 						</div>
-						<div className="grid grid-cols-2 gap-x-10 gap-y-2 text-xs font-medium">
-							<NavLink
-								to={localizeLink("/faq")}
-								prefetch="viewport"
-								className="footer-link"
-							>
-								{copy.footerLinks.faq}
-							</NavLink>
-							<NavLink
-								to={localizeLink("/privacy")}
-								prefetch="viewport"
-								className="footer-link"
-							>
-								{copy.footerLinks.privacy}
-							</NavLink>
-							<NavLink
-								to={localizeLink("/terms")}
-								prefetch="viewport"
-								className="footer-link"
-							>
-								{copy.footerLinks.terms}
-							</NavLink>
-							<Link
-								to={localizeLink("/about")}
-								prefetch="viewport"
-								className="footer-link"
-							>
-								{copy.footerLinks.about}
-							</Link>
-							<a
-								href="https://smail.now/"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="footer-link"
-							>
-								smail.now
-							</a>
-						</div>
-					</div>
-					<div className="mt-5 border-t border-theme-soft pt-4 text-[11px] text-theme-faint">
-						© {loaderData.renderedYear} smail.pw · {copy.copyright}
+						<NavLink
+							to={localizeLink("/terms")}
+							prefetch="viewport"
+							className="footer-link text-xs font-medium"
+						>
+							{copy.nav.terms}
+						</NavLink>
 					</div>
 				</footer>
 			</div>

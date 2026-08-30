@@ -1,11 +1,8 @@
 import { type Locale, SUPPORTED_LOCALES } from "~/i18n/config";
 
-export const BASE_URL = "https://smail.pw";
+export const BASE_URL = "https://mice.pub";
 
 export const MARKDOWN_BASE_PATHS = [
-	"/about",
-	"/faq",
-	"/privacy",
 	"/terms",
 	"/temporary-email-24-hours",
 	"/temporary-email-no-registration",

@@ -1,11 +1,11 @@
-## smail.pw vs smailpro (Brand Clarification)
+## FMail vs smailpro (Brand Clarification)
 
-This page clarifies a frequent search query: **smail.pw is an independent temporary email service**.
+This page clarifies a frequent search query: **FMail is an independent temporary email service**.
 
 ### Important clarification
 
-- smail.pw is not the same product as smail pro or smailpro.
-- smail.pw is not affiliated with similarly named temp mail brands.
+- FMail is not the same product as smail pro or smailpro.
+- FMail is not affiliated with similarly named temp mail brands.
 - Product features, policies, and infrastructure are managed independently.
 
 ### Why this matters
@@ -14,6 +14,4 @@ Users often compare similarly named services before registration or OTP workflow
 
 ### Related pages
 
-- [About smail.pw](/about)
-- [FAQ](/faq)
-- [Privacy Policy](/privacy)
+- [Terms of Use](/terms)

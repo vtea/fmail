@@ -24,7 +24,7 @@ function getSessionSecrets(env: Pick<Env, "SESSION_SECRETS">): string[] {
 	}
 
 	throw new Error(
-		"Missing session cookie secret. Set SESSION_SECRETS or SESSION_SECRET before starting the app.",
+		"Missing session cookie secret. Set SESSION_SECRETS before starting the app.",
 	);
 }
 

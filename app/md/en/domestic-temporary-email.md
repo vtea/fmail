@@ -19,4 +19,4 @@ Searching for **domestic temporary email** usually means you need stable deliver
 
 - [Online Temporary Email](/online-temporary-email)
 - [Disposable Email for Verification](/disposable-email-for-verification)
-- [FAQ](/faq)
+- [Terms of Use](/terms)

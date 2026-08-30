@@ -2,141 +2,72 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-	color-scheme: dark;
-	--bg-gradient:
-		radial-gradient(
-			900px 520px at -10% -10%,
-			rgba(56, 189, 248, 0.2),
-			transparent 66%
-		),
-		radial-gradient(
-			860px 500px at 110% -18%,
-			rgba(16, 185, 129, 0.18),
-			transparent 68%
-		),
-		linear-gradient(162deg, #06111d 0%, #0b1a2b 46%, #101b2a 100%);
-	--text-primary: #f2f9ff;
-	--text-secondary: #c9daee;
-	--text-muted: #a9c1dd;
-	--text-faint: #86a5cb;
-	--line-soft: rgba(123, 166, 219, 0.32);
-	--line-strong: rgba(112, 196, 241, 0.5);
-	--panel-bg: linear-gradient(
-		170deg,
-		rgba(13, 30, 50, 0.9),
-		rgba(9, 24, 42, 0.94)
-	);
-	--panel-shadow:
-		0 20px 42px rgba(3, 11, 24, 0.46), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-	--surface-soft: rgba(255, 255, 255, 0.06);
-	--surface-strong: rgba(16, 34, 56, 0.78);
-	--surface-subtle: rgba(255, 255, 255, 0.03);
-	--surface-hover: rgba(35, 65, 101, 0.56);
-	--tag-text: rgba(226, 244, 255, 0.98);
-	--tag-bg: rgba(56, 189, 248, 0.2);
-	--tag-border: rgba(125, 215, 255, 0.6);
-	--btn-gradient: linear-gradient(
-		128deg,
-		#0ea5e9 0%,
-		#0284c7 54%,
-		#14b8a6 100%
-	);
-	--btn-border: rgba(148, 231, 255, 0.58);
-	--btn-shadow:
-		0 12px 26px rgba(14, 165, 233, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.22);
-	--btn-shadow-hover:
-		0 15px 32px rgba(14, 165, 233, 0.36),
-		inset 0 1px 0 rgba(255, 255, 255, 0.28);
-	--btn-text: #f8fdff;
-	--accent-glow: 14 165 233;
-	--accent-a: rgba(56, 189, 248, 0.24);
-	--accent-b: rgba(20, 184, 166, 0.2);
-	--modal-overlay: rgba(5, 13, 26, 0.66);
-	--markdown-bg: linear-gradient(
-		170deg,
-		rgba(12, 28, 47, 0.92),
-		rgba(8, 20, 36, 0.96)
-	);
-	--markdown-shadow: 0 16px 34px rgba(3, 10, 22, 0.42);
-	--prose-body: #deebfb;
-	--prose-headings: #f7fbff;
-	--prose-links: #8dd8ff;
-	--prose-bold: #ffffff;
-	--prose-bullets: #8ecbff;
-	--prose-quotes: #eaf4ff;
-	--prose-code: #ecf6ff;
-	--prose-pre-bg: rgba(8, 18, 31, 0.88);
-	--prose-th-border: rgba(122, 170, 230, 0.46);
-	--prose-td-border: rgba(121, 164, 218, 0.34);
-}
-
-	:root[data-theme="light"] {
-		color-scheme: light;
+	color-scheme: light;
 	--bg-gradient:
 		radial-gradient(
 			880px 480px at -10% -12%,
-			rgba(59, 130, 246, 0.2),
+			rgba(99, 102, 241, 0.18),
 			transparent 66%
 		),
 		radial-gradient(
 			760px 420px at 110% -18%,
-			rgba(16, 185, 129, 0.16),
+			rgba(236, 72, 153, 0.12),
 			transparent 68%
 		),
-		linear-gradient(164deg, #f4f8ff 0%, #edf5ff 44%, #f1fbff 100%);
-	--text-primary: #1f3451;
-	--text-secondary: #3b5478;
-	--text-muted: #546b8f;
-	--text-faint: #7088aa;
-	--line-soft: rgba(116, 150, 194, 0.28);
-	--line-strong: rgba(79, 146, 206, 0.45);
+		linear-gradient(164deg, #f8f7ff 0%, #f4f6ff 44%, #faf8ff 100%);
+	--text-primary: #1e1b4b;
+	--text-secondary: #4338ca;
+	--text-muted: #5b5678;
+	--text-faint: #7c7894;
+	--line-soft: rgba(99, 102, 241, 0.22);
+	--line-strong: rgba(99, 102, 241, 0.4);
 	--panel-bg: linear-gradient(
 		170deg,
-		rgba(255, 255, 255, 0.9),
-		rgba(246, 251, 255, 0.95)
+		rgba(255, 255, 255, 0.94),
+		rgba(248, 247, 255, 0.97)
 	);
 	--panel-shadow:
-		0 14px 30px rgba(76, 111, 158, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+		0 14px 30px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 	--surface-soft: rgba(255, 255, 255, 0.74);
-	--surface-strong: rgba(245, 250, 255, 0.94);
+	--surface-strong: rgba(248, 247, 255, 0.94);
 	--surface-subtle: rgba(255, 255, 255, 0.64);
-	--surface-hover: rgba(234, 244, 255, 0.96);
-	--tag-text: #1a5fc3;
-	--tag-bg: rgba(59, 130, 246, 0.14);
-	--tag-border: rgba(76, 146, 226, 0.52);
+	--surface-hover: rgba(238, 242, 255, 0.96);
+	--tag-text: #4f46e5;
+	--tag-bg: rgba(99, 102, 241, 0.14);
+	--tag-border: rgba(99, 102, 241, 0.45);
 	--btn-gradient: linear-gradient(
 		128deg,
-		#0ea5e9 0%,
-		#0284c7 54%,
-		#0d9488 100%
+		#6366f1 0%,
+		#4f46e5 54%,
+		#7c3aed 100%
 	);
-	--btn-border: rgba(98, 181, 232, 0.56);
+	--btn-border: rgba(129, 140, 248, 0.56);
 	--btn-shadow:
-		0 10px 22px rgba(14, 165, 233, 0.24),
+		0 10px 22px rgba(99, 102, 241, 0.24),
 		inset 0 1px 0 rgba(255, 255, 255, 0.34);
 	--btn-shadow-hover:
-		0 13px 28px rgba(14, 165, 233, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+		0 13px 28px rgba(99, 102, 241, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 	--btn-text: #ffffff;
-	--accent-glow: 14 165 233;
-	--accent-a: rgba(56, 189, 248, 0.2);
-	--accent-b: rgba(16, 185, 129, 0.16);
-	--modal-overlay: rgba(54, 79, 118, 0.34);
+	--accent-glow: 99 102 241;
+	--accent-a: rgba(99, 102, 241, 0.2);
+	--accent-b: rgba(236, 72, 153, 0.14);
+	--modal-overlay: rgba(49, 46, 129, 0.34);
 	--markdown-bg: linear-gradient(
 		170deg,
 		rgba(255, 255, 255, 0.94),
-		rgba(247, 251, 255, 0.97)
+		rgba(248, 247, 255, 0.97)
 	);
-	--markdown-shadow: 0 13px 28px rgba(85, 117, 164, 0.14);
-	--prose-body: #314f75;
-	--prose-headings: #203654;
-	--prose-links: #1f6ad8;
-	--prose-bold: #1d3555;
-	--prose-bullets: #3e79c8;
-	--prose-quotes: #36577f;
-	--prose-code: #1e446e;
-	--prose-pre-bg: rgba(231, 242, 255, 0.84);
-	--prose-th-border: rgba(117, 158, 218, 0.4);
-	--prose-td-border: rgba(128, 163, 211, 0.34);
+	--markdown-shadow: 0 13px 28px rgba(99, 102, 241, 0.12);
+	--prose-body: #3730a3;
+	--prose-headings: #1e1b4b;
+	--prose-links: #4f46e5;
+	--prose-bold: #1e1b4b;
+	--prose-bullets: #6366f1;
+	--prose-quotes: #4338ca;
+	--prose-code: #3730a3;
+	--prose-pre-bg: rgba(238, 242, 255, 0.84);
+	--prose-th-border: rgba(99, 102, 241, 0.4);
+	--prose-td-border: rgba(129, 140, 248, 0.34);
 }
 
 	@layer base {
@@ -551,6 +482,41 @@
 		color: var(--text-secondary);
 	}
 
+	.section-title {
+		@apply text-base font-semibold tracking-[-0.01em];
+		color: var(--text-primary);
+		font-family:
+			"Segoe UI",
+			"PingFang SC",
+			"Hiragino Sans GB",
+			"Microsoft YaHei",
+			-apple-system,
+			system-ui,
+			sans-serif;
+	}
+
+	.section-note {
+		@apply text-xs leading-relaxed;
+		color: var(--text-faint);
+	}
+
+	.field-control {
+		@apply h-10 rounded-xl border px-3 text-sm outline-none;
+		color: var(--text-primary);
+		border-color: var(--line-soft);
+		background: var(--surface-subtle);
+	}
+
+	select.field-control {
+		appearance: none;
+		-webkit-appearance: none;
+		padding-right: 2.25rem;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2.5 4.25L6 7.75L9.5 4.25' stroke='%23646B8A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.75rem center;
+		background-size: 0.75rem 0.75rem;
+	}
+
 	.neo-button,
 	.neo-button-secondary {
 		@apply inline-flex cursor-pointer items-center justify-center rounded-full px-[1.1rem] py-[0.56rem] text-[0.76rem] font-bold tracking-[0.03em];
@@ -785,76 +751,6 @@
 		@apply rounded-[0.8rem];
 		border: 1px solid color-mix(in srgb, var(--line-soft) 66%, transparent);
 	}
-}
-
-:root:not([data-theme="light"]) .markdown-shell {
-	border-color: rgba(152, 196, 255, 0.36);
-	background: linear-gradient(
-		172deg,
-		rgba(16, 30, 50, 0.96),
-		rgba(10, 22, 40, 0.98)
-	);
-	box-shadow:
-		0 16px 36px rgba(2, 9, 21, 0.48),
-		inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-:root:not([data-theme="light"]) .markdown-shell::before {
-	background:
-		linear-gradient(148deg, rgba(80, 143, 245, 0.16), transparent 46%),
-		linear-gradient(180deg, rgba(130, 185, 255, 0.08), transparent 56%);
-	opacity: 0.3;
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose {
-	--tw-prose-body: #e8f1ff;
-	--tw-prose-headings: #ffffff;
-	--tw-prose-links: #9ad8ff;
-	--tw-prose-bold: #ffffff;
-	--tw-prose-bullets: #97c3ff;
-	--tw-prose-quotes: #eff6ff;
-	--tw-prose-code: #f2f7ff;
-	--tw-prose-pre-bg: #091629;
-	--tw-prose-th-borders: rgba(146, 186, 243, 0.52);
-	--tw-prose-td-borders: rgba(132, 171, 230, 0.34);
-	@apply text-[1rem] leading-[1.88];
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose h2 {
-	border-bottom-color: rgba(145, 187, 244, 0.4);
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose h3 {
-	color: #f7fbff;
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose p,
-:root:not([data-theme="light"]) .markdown-shell .prose li {
-	@apply leading-[1.9];
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose a {
-	text-decoration-color: rgba(154, 216, 255, 0.55);
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose a:hover {
-	color: #c2e9ff;
-	text-decoration-color: rgba(194, 233, 255, 0.78);
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose blockquote {
-	border-left-color: rgba(120, 176, 245, 0.82);
-	background: rgba(34, 55, 84, 0.58);
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose :not(pre) > code {
-	border-color: rgba(129, 174, 236, 0.44);
-	background: rgba(33, 56, 88, 0.72);
-}
-
-:root:not([data-theme="light"]) .markdown-shell .prose pre {
-	border-color: rgba(129, 174, 236, 0.34);
-	background: rgba(9, 22, 41, 0.92);
 }
 
 @media (prefers-reduced-motion: reduce) {

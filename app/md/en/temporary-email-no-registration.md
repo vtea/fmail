@@ -1,6 +1,6 @@
 ## Temporary Email No Registration
 
-If you want a mailbox without onboarding, **temporary email no registration** is the fastest route. smail.pw lets you receive emails without creating an account or password, which is ideal for temp mail sign-up flows.
+If you want a mailbox without onboarding, **temporary email no registration** is the fastest route. FMail lets you receive emails without creating an account or password, which is ideal for temp mail sign-up flows.
 
 ### When this is useful
 
@@ -31,7 +31,7 @@ No-registration inboxes are temporary. They are not built for long-term identity
 
 - [24 Hour Temporary Email](/temporary-email-24-hours)
 - [Disposable Email for Verification Codes](/disposable-email-for-verification)
-- [Privacy Policy](/privacy)
+- [Terms of Use](/terms)
 
 ### Next-step guides
 

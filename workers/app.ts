@@ -1,6 +1,11 @@
 import { nanoid } from "nanoid";
 import Parser from "postal-mime";
 import { createRequestHandler } from "react-router";
+import {
+	getMailDomainConfig,
+	isAllowedMailboxAddress,
+	normalizeEmailAddress,
+} from "~/utils/mail";
 
 declare module "react-router" {
 	export interface AppLoadContext {
@@ -27,14 +32,33 @@ export default {
 		const ab = await new Response(msg.raw).arrayBuffer();
 		const parsed = await parser.parse(ab);
 		const id = nanoid();
+		const toAddress = normalizeEmailAddress(msg.to);
+		const { domains } = getMailDomainConfig(env);
+		if (!toAddress.includes("@") || !isAllowedMailboxAddress(toAddress, domains)) {
+			msg.setReject("Recipient address is not accepted");
+			return;
+		}
 
-		await env.D1.prepare(
+		const inserted = await env.D1.prepare(
 			"INSERT INTO emails (id, to_address, from_name, from_address, subject, time) VALUES (?, ?, ?, ?, ?, ?)",
 		)
-			.bind(id, msg.to, parsed.from?.name, parsed.from?.address, parsed.subject, Date.now())
+			.bind(
+				id,
+				toAddress,
+				parsed.from?.name ?? "",
+				parsed.from?.address ?? "",
+				parsed.subject ?? "",
+				Date.now(),
+			)
 			.run();
+		if (!inserted.success) {
+			throw new Error("Failed to persist email metadata");
+		}
 
-		await env.R2.put(id, ab);
+		const stored = await env.R2.put(id, ab);
+		if (!stored) {
+			throw new Error("Failed to persist email body");
+		}
 	},
 	async scheduled() {
 	},

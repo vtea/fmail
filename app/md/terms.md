@@ -4,18 +4,18 @@ _Last updated: 2025-11-27_
 
 ### 1. Agreement to terms
 
-By accessing or using smail.pw (the "Service"), you agree to be bound by these Terms of Use. If you do not agree, please do not use the Service.
+By accessing or using FMail (the "Service"), you agree to be bound by these Terms of Use. If you do not agree, please do not use the Service.
 
 ### 2. Nature of the service
 
-smail.pw provides **temporary email addresses** designed for short‑term and disposable use.
+FMail provides **temporary email addresses** designed for short‑term and disposable use.
 
 - Email addresses and their content may be deleted at any time, with or without notice.
 - The Service is provided on an **"as is" and "as available"** basis, without guarantees of uptime, delivery, or long‑term storage.
 
 ### 3. Acceptable use
 
-You agree **not** to use smail.pw for any of the following:
+You agree **not** to use FMail for any of the following:
 
 - Sending or facilitating spam, scams, or phishing
 - Harassment, threats, or abuse of others
@@ -27,7 +27,7 @@ We may suspend or block access, addresses, or emails that are suspected of viola
 
 ### 4. No important or critical accounts
 
-Because addresses are temporary and may be accessible to others who know the same address, you should **not** use smail.pw for:
+Because addresses are temporary and may be accessible to others who know the same address, you should **not** use FMail for:
 
 - Banking, financial, or investment accounts
 - Work, government, or legal communications
@@ -47,7 +47,7 @@ The Service is intended for convenience and low‑risk use only.
 
 ### 6. Intellectual property
 
-All rights, title, and interest in and to the Service (excluding user‑generated content in emails) remain with smail.pw and its licensors.
+All rights, title, and interest in and to the Service (excluding user‑generated content in emails) remain with FMail and its licensors.
 
 You may not copy, modify, distribute, sell, or lease any part of the Service unless you have our written permission.
 
@@ -59,13 +59,13 @@ We do not warrant that the Service will be uninterrupted, secure, or error‑fre
 
 ### 8. Limitation of liability
 
-To the maximum extent permitted by law, smail.pw and its owners, operators, and affiliates will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of data, profits, or revenue arising out of or related to your use of the Service.
+To the maximum extent permitted by law, FMail and its owners, operators, and affiliates will not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of data, profits, or revenue arising out of or related to your use of the Service.
 
 If we are found to be liable despite the above, our total aggregate liability will be limited to the amount you paid us for using the Service (which is typically zero).
 
 ### 9. Indemnification
 
-You agree to indemnify and hold harmless smail.pw and its owners, operators, and affiliates from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or related to your use of the Service or violation of these Terms.
+You agree to indemnify and hold harmless FMail and its owners, operators, and affiliates from and against any claims, liabilities, damages, losses, and expenses (including reasonable legal fees) arising out of or related to your use of the Service or violation of these Terms.
 
 ### 10. Changes to the Service and to these Terms
 

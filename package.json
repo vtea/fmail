@@ -5,12 +5,15 @@
 	"scripts": {
 		"build": "react-router build",
 		"cf-typegen": "wrangler types",
-		"deploy": "pnpm run build && pnpm run migrate && wrangler deploy",
+		"deploy": "pnpm run migrate && wrangler deploy --keep-vars",
 		"dev": "react-router dev",
+		"predev": "pnpm run migrate:local",
 		"postinstall": "pnpm run cf-typegen",
 		"preview": "pnpm run build && vite preview",
+		"prepreview": "pnpm run migrate:local",
 		"typecheck": "pnpm run cf-typegen && react-router typegen && tsc -b",
-		"migrate": "wrangler d1 migrations apply D1 --remote"
+		"migrate": "wrangler d1 migrations apply D1 --remote --preview=false",
+		"migrate:local": "CI=1 wrangler d1 migrations apply D1 --local"
 	},
 	"dependencies": {
 		"@markdoc/markdoc": "^0.5.7",

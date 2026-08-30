@@ -11,7 +11,7 @@
 - `app/md/<locale>/`：多语言 SEO Markdown 页面。
 - `app/i18n/`：语言配置与文案。
 - `app/.server/session.ts`：签名 Cookie Session 存储。
-- `app/utils/`：通用工具（主题、meta、邮件保留策略等）。
+- `app/utils/`：通用工具（mail 域名解析、meta、邮件保留策略等）。
 - `workers/app.ts`：Cloudflare Worker 入口，处理 `fetch` / `email` / `scheduled`。
 - `migrations/*.sql`：D1 SQL 迁移文件（当前项目不使用 ORM）。
 
@@ -28,8 +28,9 @@
 - `pnpm run preview`：本地预览构建产物。
 - `pnpm run typecheck`：Cloudflare 类型生成 + Router 类型生成 + TS 检查。
 - `pnpm run cf-typegen`：重新生成 Cloudflare 环境类型。
-- `pnpm run migrate`：远端执行 D1 迁移（绑定名：`D1`）。
-- `pnpm run deploy`：构建 + 迁移 + Wrangler 部署。
+- `pnpm run migrate`：远端执行生产 D1 迁移（绑定名：`D1`，`--preview=false`）。
+- `pnpm run migrate:local`：本机 Miniflare D1 迁移（`dev` / `preview` 启动前会自动跑）。
+- `pnpm run deploy`：生产 D1 迁移 + Wrangler 部署（不包含 build；CI 的 Build command 应单独跑 `pnpm run build`）。
 
 ## 代码风格与命名规范
 - 使用 TypeScript/TSX + ESM。
@@ -48,8 +49,7 @@
 - 对应语言内容文件：`app/md/<locale>/...`
 
 新增 Markdown 落地页时，至少保证：
-- `en` 与 `zh` 内容完整；
-- 其他已支持语言补齐同名文件，避免出现可访问但内容缺失。
+- `en` 与 `zh` 内容完整。
 
 ## 测试与提交前检查
 当前项目未配置独立单测框架，提交前至少执行：

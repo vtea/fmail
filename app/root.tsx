@@ -6,7 +6,6 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
-	useLoaderData,
 	useLocation,
 } from "react-router";
 
@@ -25,18 +24,12 @@ import {
 	isMarkdownLocaleIndexable,
 	MARKDOWN_INDEXABLE_LOCALES,
 } from "~/seo.config";
-import { DEFAULT_THEME, parseThemeFromCookieHeader } from "~/utils/theme";
 import type { Route } from "./+types/root";
 import "./app.css";
 
-const SITE_OG_TITLE = "smail.pw · 24-Hour Temporary Email";
+const SITE_OG_TITLE = "FMail · 24-Hour Temporary Email";
 const SITE_OG_DESCRIPTION =
 	"Free disposable email inbox with 24-hour auto-expiry. Use a temporary address for sign-ups and verification.";
-
-export async function loader({ request }: Route.LoaderArgs) {
-	const theme = parseThemeFromCookieHeader(request.headers.get("Cookie"));
-	return { theme };
-}
 
 export function meta({ location }: Route.MetaArgs) {
 	const pathname = normalizePathname(location.pathname);
@@ -79,7 +72,7 @@ export function meta({ location }: Route.MetaArgs) {
 		},
 		{
 			property: "og:site_name",
-			content: "smail.pw",
+			content: "FMail",
 		},
 		{
 			property: "og:url",
@@ -110,26 +103,20 @@ export function meta({ location }: Route.MetaArgs) {
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	const location = useLocation();
-	const { theme } = useLoaderData<typeof loader>();
 	const locale = getLocaleFromPathname(location.pathname);
-	const resolvedTheme = theme ?? DEFAULT_THEME;
 
-		return (
-			<html
-				lang={locale}
-				dir={getLocaleDirection(locale)}
-				data-theme={resolvedTheme === "light" ? "light" : undefined}
-			>
-				<head>
-					<meta charSet="utf-8" />
-					<meta name="viewport" content="width=device-width, initial-scale=1" />
-					<Meta />
-					<Links />
-				</head>
-				<body>
-					{children}
-					<ScrollRestoration />
-					<Scripts />
+	return (
+		<html lang={locale} dir={getLocaleDirection(locale)}>
+			<head>
+				<meta charSet="utf-8" />
+				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<Meta />
+				<Links />
+			</head>
+			<body>
+				{children}
+				<ScrollRestoration />
+				<Scripts />
 			</body>
 		</html>
 	);

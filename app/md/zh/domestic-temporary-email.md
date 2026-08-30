@@ -19,4 +19,4 @@
 
 - [在线临时邮箱](/online-temporary-email)
 - [验证码一次性邮箱](/disposable-email-for-verification)
-- [常见问题](/faq)
+- [使用条款](/terms)
