@@ -12,7 +12,7 @@
 - `app/i18n/`：语言配置与文案。
 - `app/.server/session.ts`：签名 Cookie Session 存储。
 - `app/utils/`：通用工具（mail 域名解析、meta、邮件保留策略等）。
-- `workers/app.ts`：Cloudflare Worker 入口，处理 `fetch` / `email` / `scheduled`。
+- `workers/app.ts`：Cloudflare Worker 入口，处理 `fetch` / `email`。
 - `migrations/*.sql`：D1 SQL 迁移文件（当前项目不使用 ORM）。
 
 ## 真实数据架构（必须遵循）
@@ -28,7 +28,7 @@
 - `pnpm run preview`：本地预览构建产物。
 - `pnpm run typecheck`：Cloudflare 类型生成 + Router 类型生成 + TS 检查。
 - `pnpm run cf-typegen`：重新生成 Cloudflare 环境类型。
-- `pnpm run migrate`：远端执行生产 D1 迁移（绑定名：`D1`，`--preview=false`）。
+- `pnpm run migrate`：远端执行生产 D1 迁移（绑定名：`D1`，`--no-preview`）。
 - `pnpm run migrate:local`：本机 Miniflare D1 迁移（`dev` / `preview` 启动前会自动跑）。
 - `pnpm run deploy`：生产 D1 迁移 + Wrangler 部署（不包含 build；CI 的 Build command 应单独跑 `pnpm run build`）。
 

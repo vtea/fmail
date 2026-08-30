@@ -97,13 +97,6 @@ export function isAllowedMailboxAddress(
 	return GENERATED_LOCAL_PART.test(localPart) || isValidCustomLocalPart(localPart);
 }
 
-export function isGeneratedEmailAddress(
-	address: string,
-	allowed: readonly string[],
-): boolean {
-	return isAllowedMailboxAddress(address, allowed);
-}
-
 export function isSameMailboxAddress(left: string, right: string): boolean {
 	const normalizedLeft = normalizeEmailAddress(left);
 	const normalizedRight = normalizeEmailAddress(right);

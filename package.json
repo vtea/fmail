@@ -1,18 +1,18 @@
 {
-	"name": "smailpw",
+	"name": "fmail",
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "react-router build",
+		"build": "react-router build && rm -f build/server/.dev.vars",
 		"cf-typegen": "wrangler types",
 		"deploy": "pnpm run migrate && wrangler deploy --keep-vars",
 		"dev": "react-router dev",
 		"predev": "pnpm run migrate:local",
 		"postinstall": "pnpm run cf-typegen",
-		"preview": "pnpm run build && vite preview",
+		"preview": "pnpm run build && (cp .dev.vars build/server/.dev.vars 2>/dev/null || true) && vite preview",
 		"prepreview": "pnpm run migrate:local",
 		"typecheck": "pnpm run cf-typegen && react-router typegen && tsc -b",
-		"migrate": "wrangler d1 migrations apply D1 --remote --preview=false",
+		"migrate": "wrangler d1 migrations apply D1 --remote --no-preview",
 		"migrate:local": "CI=1 wrangler d1 migrations apply D1 --local"
 	},
 	"dependencies": {

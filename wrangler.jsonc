@@ -1,6 +1,6 @@
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "smail-app",
+	"name": "fmail",
 	"compatibility_date": "2025-11-26",
 	"main": "./workers/app.ts",
 	"secrets": {
@@ -10,22 +10,21 @@
 	"observability": {
 		"enabled": true
 	},
-	"triggers": {
-		"crons": ["*/30 * * * *"]
-	},
+	"routes": [
+		{ "pattern": "mail.zjjqw.com", "custom_domain": true }
+	],
 	"d1_databases": [
 		{
 			"binding": "D1",
-			"database_name": "smail-v3",
-			"database_id": "8a38551f-5eab-4095-b69b-2f4a87e9d8d1",
-			"preview_database_id": "3e874660-d45c-480e-abe8-65441d848882",
+			"database_name": "fmail",
+			"database_id": "9772dcbc-8e91-48e0-bddd-24240a08e0d7",
 			"migrations_dir": "migrations"
 		}
 	],
 	"r2_buckets": [
 		{
 			"binding": "R2",
-			"bucket_name": "smailv3"
+			"bucket_name": "fmail"
 		}
 	]
 }

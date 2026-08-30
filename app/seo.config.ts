@@ -1,6 +1,6 @@
 import { type Locale, SUPPORTED_LOCALES } from "~/i18n/config";
 
-export const BASE_URL = "https://mice.pub";
+export const BASE_URL = "https://mail.zjjqw.com";
 
 export const MARKDOWN_BASE_PATHS = [
 	"/terms",

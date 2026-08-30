@@ -483,7 +483,9 @@ function RestoreAddressForm({
 						{restoreError}
 					</p>
 				) : (
-					<p className="section-note">{copy.restoreHint}</p>
+					<p className="section-note">
+						{defaultDomain ? copy.restoreHint : copy.domainsUnconfigured}
+					</p>
 				)}
 			</fetcher.Form>
 		</div>
@@ -668,6 +670,10 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
 									<p role="alert" className="section-note text-red-500">
 										{formError}
 									</p>
+								) : mailDomains.length === 0 ? (
+									<p role="status" className="section-note">
+										{copy.domainsUnconfigured}
+									</p>
 								) : (
 									<p className="section-note">{copy.generateHint}</p>
 								)}
@@ -678,7 +684,7 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
 								copy={copy}
 								fetcher={fetcher}
 								actionError={actionError}
-								disabled={isSubmitting}
+								disabled={isSubmitting || mailDomains.length === 0}
 								defaultDomain={defaultDomain}
 								showHeading={false}
 							/>

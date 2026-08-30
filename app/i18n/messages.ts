@@ -23,6 +23,7 @@ export interface Dictionary {
 		domainLabel: string;
 		getEmail: string;
 		generateHint: string;
+		domainsUnconfigured: string;
 		invalidUsername: string;
 		stats: {
 			lifetimeValue: string;
@@ -94,6 +95,8 @@ const en: Dictionary = {
 		domainLabel: "Domain",
 		getEmail: "Get Email",
 		generateHint: "Leave the username empty to get a random name-xxxxxx@your-domain address.",
+		domainsUnconfigured:
+			"No receiving domains configured. Set Worker secrets MAIL_DOMAIN and MAIL_DOMAINS. A Custom Domain only serves the website.",
 		invalidUsername: "Invalid username. Use 1-32 letters, numbers, dots, hyphens, or underscores.",
 		stats: {
 			lifetimeValue: "24h",
@@ -165,6 +168,8 @@ const zh: Dictionary = {
 		domainLabel: "域名",
 		getEmail: "获取邮箱",
 		generateHint: "不填用户名会随机生成 name-xxxxxx@所选域名。",
+		domainsUnconfigured:
+			"未配置收信域名。请在 Worker 的 MAIL_DOMAIN / MAIL_DOMAINS 里填写；网站 Custom Domain 不会出现在下拉中。",
 		invalidUsername: "用户名无效。请使用 1–32 位字母、数字、点、连字符或下划线。",
 		stats: {
 			lifetimeValue: "24小时",

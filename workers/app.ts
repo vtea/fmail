@@ -60,6 +60,4 @@ export default {
 			throw new Error("Failed to persist email body");
 		}
 	},
-	async scheduled() {
-	},
 } satisfies ExportedHandler<Env>;
