@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
 	data,
 	redirect,
@@ -119,20 +119,28 @@ function isAddressExpired(
 	return now - addressIssuedAt >= MAIL_RETENTION_MS;
 }
 
-function EmailModal({
+type HomeModalCopy = ReturnType<typeof getDictionary>["home"]["modal"];
+
+function EmailDetailView({
 	email,
-	onClose,
 	copy,
+	heading,
+	actions,
+	titleId,
 }: {
 	email: Email;
-	onClose: () => void;
-	copy: ReturnType<typeof getDictionary>["home"]["modal"];
+	copy: HomeModalCopy;
+	heading?: string;
+	actions?: ReactNode;
+	titleId?: string;
 }) {
 	const [detail, setDetail] = useState<EmailDetail | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
+		let cancelled = false;
 		setLoading(true);
+		setDetail(null);
 		fetch(`/api/email/${email.id}`, {
 			credentials: "include",
 		})
@@ -143,12 +151,90 @@ function EmailModal({
 				return (await res.json()) as EmailDetail;
 			})
 			.then((emailDetail) => {
-				setDetail(emailDetail);
-				setLoading(false);
+				if (!cancelled) {
+					setDetail(emailDetail);
+					setLoading(false);
+				}
 			})
-			.catch(() => setLoading(false));
+			.catch(() => {
+				if (!cancelled) {
+					setLoading(false);
+				}
+			});
+		return () => {
+			cancelled = true;
+		};
 	}, [email.id]);
 
+	const bodyClassName = "h-full min-h-[320px] w-full";
+
+	return (
+		<div className="flex min-h-0 flex-1 flex-col">
+			<div className="border-theme-soft flex items-start justify-between gap-3 border-b px-4 py-4 sm:px-5">
+				<div className="min-w-0 space-y-1">
+					{heading ? (
+						<div className="section-note font-semibold">{heading}</div>
+					) : null}
+					<div id={titleId} className="section-title max-w-xl truncate pr-2">
+						{email.subject}
+					</div>
+				</div>
+				{actions}
+			</div>
+
+			<div className="border-theme-soft text-theme-secondary grid gap-2.5 border-b px-4 py-3 text-sm leading-relaxed sm:grid-cols-2 sm:px-5">
+				<div className="border-theme-soft bg-theme-subtle min-w-0 rounded-lg border px-3 py-2.5">
+					<span className="section-note block font-semibold">
+						{copy.from}
+					</span>
+					<p className="mt-1 break-all">
+						{email.from_name} &lt;{email.from_address}&gt;
+					</p>
+				</div>
+				<div className="border-theme-soft bg-theme-subtle rounded-lg border px-3 py-2.5">
+					<span className="section-note block font-semibold">
+						{copy.time}
+					</span>
+					<p className="mt-1">{new Date(email.time).toLocaleString()}</p>
+				</div>
+			</div>
+
+			<div className="flex min-h-0 flex-1 flex-col p-4 sm:p-5">
+				{loading ? (
+					<div
+						className={`section-note flex items-center justify-center rounded-xl border border-dashed border-theme-soft ${bodyClassName}`}
+					>
+						{copy.loading}
+					</div>
+				) : detail?.body ? (
+					<iframe
+						srcDoc={detail.body}
+						title="Email content"
+						className={`border-theme-soft overflow-hidden rounded-xl border bg-white ${bodyClassName}`}
+						sandbox=""
+						referrerPolicy="no-referrer"
+					/>
+				) : (
+					<div
+						className={`section-note flex items-center justify-center rounded-xl border border-dashed border-theme-soft ${bodyClassName}`}
+					>
+						{copy.empty}
+					</div>
+				)}
+			</div>
+		</div>
+	);
+}
+
+function EmailModal({
+	email,
+	onClose,
+	copy,
+}: {
+	email: Email;
+	onClose: () => void;
+	copy: HomeModalCopy;
+}) {
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
 			if (e.key === "Escape") onClose();
@@ -159,7 +245,7 @@ function EmailModal({
 
 	return (
 		<div
-			className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center px-4 backdrop-blur-sm"
+			className="modal-backdrop fixed inset-0 z-50 flex items-center justify-center px-4 backdrop-blur-sm md:hidden"
 			onClick={onClose}
 		>
 			<div
@@ -169,71 +255,31 @@ function EmailModal({
 				className="glass-panel modal-sheet flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden"
 				onClick={(e) => e.stopPropagation()}
 			>
-				<div className="border-theme-soft flex items-start justify-between gap-3 border-b px-4 py-4 sm:px-5">
-					<div className="space-y-1">
-						<div className="section-note font-semibold">{copy.title}</div>
-						<div
-							id="email-preview-title"
-							className="section-title max-w-xl truncate pr-2"
+				<EmailDetailView
+					email={email}
+					copy={copy}
+					heading={copy.title}
+					titleId="email-preview-title"
+					actions={
+						<button
+							type="button"
+							aria-label="Close email preview"
+							onClick={onClose}
+							className="border-theme-strong text-theme-secondary bg-theme-soft inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border hover:brightness-95"
 						>
-							{email.subject}
-						</div>
-					</div>
-					<button
-						type="button"
-						aria-label="Close email preview"
-						onClick={onClose}
-						className="border-theme-strong text-theme-secondary bg-theme-soft inline-flex h-8 w-8 items-center justify-center rounded-full border hover:brightness-95"
-					>
-						<svg
-							viewBox="0 0 20 20"
-							fill="none"
-							stroke="currentColor"
-							strokeWidth="1.8"
-							className="h-4 w-4"
-							aria-hidden="true"
-						>
-							<path d="M5 5L15 15M15 5L5 15" strokeLinecap="round" />
-						</svg>
-					</button>
-				</div>
-
-				<div className="border-theme-soft text-theme-secondary grid gap-2.5 border-b px-4 py-3 text-sm leading-relaxed sm:grid-cols-2 sm:px-5">
-					<div className="border-theme-soft bg-theme-subtle min-w-0 rounded-lg border px-3 py-2.5">
-						<span className="section-note block font-semibold">
-							{copy.from}
-						</span>
-						<p className="mt-1 break-all">
-							{email.from_name} &lt;{email.from_address}&gt;
-						</p>
-					</div>
-					<div className="border-theme-soft bg-theme-subtle rounded-lg border px-3 py-2.5">
-						<span className="section-note block font-semibold">
-							{copy.time}
-						</span>
-						<p className="mt-1">{new Date(email.time).toLocaleString()}</p>
-					</div>
-				</div>
-
-				<div className="p-4 sm:p-5">
-					{loading ? (
-						<div className="section-note flex h-[min(62vh,700px)] items-center justify-center rounded-xl border border-dashed border-theme-soft">
-							{copy.loading}
-						</div>
-					) : detail?.body ? (
-						<iframe
-							srcDoc={detail.body}
-							title="Email content"
-							className="border-theme-soft h-[min(62vh,700px)] w-full overflow-hidden rounded-xl border bg-white"
-							sandbox=""
-							referrerPolicy="no-referrer"
-						/>
-					) : (
-						<div className="section-note flex h-[min(62vh,700px)] items-center justify-center rounded-xl border border-dashed border-theme-soft">
-							{copy.empty}
-						</div>
-					)}
-				</div>
+							<svg
+								viewBox="0 0 20 20"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="1.8"
+								className="h-4 w-4"
+								aria-hidden="true"
+							>
+								<path d="M5 5L15 15M15 5L5 15" strokeLinecap="round" />
+							</svg>
+						</button>
+					}
+				/>
 			</div>
 		</div>
 	);
@@ -554,6 +600,15 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
 		}
 	}, [actionError, fetcher.data?.error]);
 
+	useEffect(() => {
+		setSelectedEmail((current) => {
+			if (!current) {
+				return null;
+			}
+			return emails.find((item) => item.id === current.id) ?? null;
+		});
+	}, [emails]);
+
 	return (
 		<div className="flex flex-1 py-3 sm:py-4">
 			<script
@@ -753,6 +808,7 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
 													value="delete"
 													className="neo-button-secondary flex-1 justify-center"
 													onClick={() => {
+														setSelectedEmail(null);
 														fetcher.submit(
 															{ intent: "delete" },
 															{ method: "post" },
@@ -801,47 +857,69 @@ export default function Home({ loaderData, actionData }: Route.ComponentProps) {
 								</button>
 							</div>
 
-							<div className="flex min-h-[360px] flex-col gap-2.5 overflow-y-auto py-1 pr-0.5">
-								{emails.length === 0 ? (
+							{emails.length === 0 ? (
+								<div className="flex min-h-[360px] flex-col py-1">
 									<div className="border-theme-strong bg-theme-subtle mt-6 rounded-2xl border border-dashed px-4 py-10 text-center">
 										<p className="section-title">{copy.emptyInboxTitle}</p>
 										<p className="section-note mt-1">
 											{copy.emptyInboxDescription}
 										</p>
 									</div>
-								) : (
-									emails.map((email) => (
-										<button
-											key={email.id}
-											type="button"
-											className="email-item"
-											onClick={() => setSelectedEmail(email)}
-										>
-											<div className="min-w-0">
-												<div className="flex items-start justify-between gap-3">
-													<div className="text-theme-primary font-display truncate text-sm font-semibold">
-														{email.subject}
+								</div>
+							) : (
+								<div className="grid min-h-[420px] gap-3 md:h-[min(70vh,560px)] md:grid-cols-[minmax(16rem,38%)_minmax(0,1fr)]">
+									<div className="flex min-h-0 flex-col gap-2.5 overflow-y-auto py-1 pr-0.5">
+										{emails.map((email) => {
+											const isSelected = selectedEmail?.id === email.id;
+											return (
+												<button
+													key={email.id}
+													type="button"
+													className="email-item"
+													data-selected={isSelected ? "true" : undefined}
+													aria-current={isSelected ? "true" : undefined}
+													onClick={() => setSelectedEmail(email)}
+												>
+													<div className="min-w-0">
+														<div className="flex items-start justify-between gap-3">
+															<div className="text-theme-primary font-display truncate text-sm font-semibold">
+																{email.subject}
+															</div>
+															<div className="section-note whitespace-nowrap">
+																{formatTime(
+																	email.time,
+																	locale,
+																	loaderData.renderedAt,
+																)}
+															</div>
+														</div>
+														<div className="text-theme-muted mt-1 truncate text-xs">
+															{email.from_name}
+															<span className="text-theme-faint">
+																{" "}
+																&lt;{email.from_address}&gt;
+															</span>
+														</div>
 													</div>
-													<div className="section-note whitespace-nowrap">
-														{formatTime(
-															email.time,
-															locale,
-															loaderData.renderedAt,
-														)}
-													</div>
-												</div>
-												<div className="text-theme-muted mt-1 truncate text-xs">
-													{email.from_name}
-													<span className="text-theme-faint">
-														{" "}
-														&lt;{email.from_address}&gt;
-													</span>
-												</div>
+												</button>
+											);
+										})}
+									</div>
+									<div className="border-theme-soft bg-theme-subtle hidden min-h-0 flex-col overflow-hidden rounded-2xl border md:flex">
+										{selectedEmail ? (
+											<EmailDetailView
+												email={selectedEmail}
+												copy={copy.modal}
+												heading={copy.modal.title}
+											/>
+										) : (
+											<div className="section-note flex flex-1 items-center justify-center px-4 text-center">
+												{copy.selectEmailHint}
 											</div>
-										</button>
-									))
-								)}
-							</div>
+										)}
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</section>

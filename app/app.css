@@ -579,6 +579,16 @@
 		opacity: 1;
 	}
 
+	.email-item[data-selected="true"] {
+		border-color: color-mix(in srgb, var(--line-strong) 92%, transparent);
+		background: color-mix(in srgb, var(--surface-hover) 98%, transparent);
+		box-shadow: 0 8px 16px rgba(var(--accent-glow), 0.14);
+	}
+
+	.email-item[data-selected="true"]::before {
+		opacity: 1;
+	}
+
 	.email-item > * {
 		@apply relative z-[1];
 	}

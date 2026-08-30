@@ -39,6 +39,7 @@ export interface Dictionary {
 		loadingEmails: string;
 		emptyInboxTitle: string;
 		emptyInboxDescription: string;
+		selectEmailHint: string;
 		refreshInbox: string;
 		refreshingInbox: string;
 		lastRefresh: string;
@@ -112,6 +113,7 @@ const en: Dictionary = {
 		loadingEmails: "Loading emails...",
 		emptyInboxTitle: "No emails yet",
 		emptyInboxDescription: "Emails will appear here automatically.",
+		selectEmailHint: "Select a message to read",
 		refreshInbox: "Refresh",
 		refreshingInbox: "Refreshing...",
 		lastRefresh: "Last refresh",
@@ -185,6 +187,7 @@ const zh: Dictionary = {
 		loadingEmails: "正在加载邮件...",
 		emptyInboxTitle: "暂无邮件",
 		emptyInboxDescription: "邮件将自动在此显示。",
+		selectEmailHint: "选择一封邮件查看内容",
 		refreshInbox: "刷新",
 		refreshingInbox: "刷新中...",
 		lastRefresh: "最近刷新",
